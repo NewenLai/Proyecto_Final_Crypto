@@ -1,2 +1,4 @@
 venv/
 Pruebas.py
+.env
+**/__pycache__
