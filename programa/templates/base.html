@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block titulo_pagina %}{% endblock %}</title>
+        <link rel="stylesheet" href="static/css/styles.css">
+    </head>
+    <body>
+        <header>
+            <p>Lista de movimientos</p>
+        </header>
+        <section>
+            <nav>
+                <a href="/">Movimientos</a> | <a href="/purchase">Compra/Venta</a> | <a href="/status">Status</a>
+
+            </nav>
+            {% block contenido %}{% endblock %} 
+        </section>
+        <footer>
+            <p>&copy; 2021 - Todos los derechos reservados</p> 
+        </footer>
+    </body>
+</html>

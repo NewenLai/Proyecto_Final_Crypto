@@ -1,15 +1,30 @@
+import requests
+from requests.sessions import merge_setting
 from programa import app
-from flask import render_template
+from flask import render_template, request
 from programa.models import DBManager, Consulta
 
 
 @app.route("/")
 def inicio():
-    return "Pagina de inicio"#render_template("inicio.html")
+    return render_template("inicio.html")
 
-@app.route("/purchase")
+@app.route("/purchase", methods=["GET", "POST"])
 def compra():
+    if request.method =="GET":
+        #FROM = input("Moneda from: ")
+        #TO = input("Moneda To: ")
+        #Amount = input("Cantidad de {} a invertir: ".format(FROM))
 
-    actualizar = Consulta.Conversion()
-    DBManager.Manager(actualizar[0], actualizar[1][0:10], actualizar[1][11:19],  actualizar[2], actualizar[3], actualizar[4])
-    return "Pagina de compra"
+        #Consultaprecio = Consulta.Conversion(TO, Amount, FROM)
+        #DBManager.Manager(Consultaprecio[0], Consultaprecio[1][0:10], Consultaprecio[1][11:19],  Consultaprecio[2], Consultaprecio[3], Consultaprecio[4])
+        
+        return render_template("purchase.html")
+    else:
+        return ("HOLA QUE ASE")
+
+
+@app.route("/status")
+def estado():
+    
+    return render_template("status.html")
