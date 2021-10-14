@@ -1,27 +1,29 @@
+import sqlite3
 import requests
 from requests.sessions import merge_setting
 from programa import app
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from programa.models import DBManager, Consulta
 
 
 @app.route("/")
 def inicio():
-    return render_template("inicio.html")
+
+    Tabla = DBManager.CrearTabla()
+    return render_template("inicio.html", obj = Tabla[0], items = Tabla[1])
+
+
 
 @app.route("/purchase", methods=["GET", "POST"])
 def compra():
     if request.method =="GET":
-        #FROM = input("Moneda from: ")
-        #TO = input("Moneda To: ")
-        #Amount = input("Cantidad de {} a invertir: ".format(FROM))
-
-        #Consultaprecio = Consulta.Conversion(TO, Amount, FROM)
-        #DBManager.Manager(Consultaprecio[0], Consultaprecio[1][0:10], Consultaprecio[1][11:19],  Consultaprecio[2], Consultaprecio[3], Consultaprecio[4])
-        
         return render_template("purchase.html")
     else:
-        return ("HOLA QUE ASE")
+        datos = request.form
+        Consultaprecio = Consulta.Conversion(datos)
+        DBManager.Manager(Consultaprecio[0], Consultaprecio[1][0:10], Consultaprecio[1][11:19],  Consultaprecio[2], Consultaprecio[3], Consultaprecio[4])
+        
+        return redirect(url_for("inicio"))
 
 
 @app.route("/status")

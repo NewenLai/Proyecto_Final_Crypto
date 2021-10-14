@@ -4,10 +4,26 @@
 
 {% block contenido %} 
     <h1>Lista de Movimientos</h1>
-        <table>
-            <tr>
-                <th>Fecha</th>
-                <th>Hora</th>
-            </tr>
-        </table>
+    <table>
+
+        <tr>
+            {%for item in obj%}
+            <th class="tabla">{{item}}</th>
+            {%endfor%}
+        </tr>
+        {%for item in items%}
+        <tr>
+            <td class="tabla">{{item.Fecha}}</td>
+            <td class="tabla">{{item.Hora}}</td>
+            <td class="tabla">{{item.From}}</td>
+            <td class="tabla">{{item.To}}</td>
+            <td class="tabla">{{item.Concepto}}</td>
+            <td class="tabla">{{item.Invertido}}</td>
+            <td class="tabla">{{item.Recibido}}</td>
+            <td class="tabla">{{item.PrecioUnit}}</td>
+        </tr>
+        {%endfor%}
+
+    </table>
+
 {% endblock %}
