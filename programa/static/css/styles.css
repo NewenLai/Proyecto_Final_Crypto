@@ -1,32 +1,61 @@
 .Titulo{
-    padding-left: 150px;
+    text-align: center;
+    margin-bottom: 45px;
+}
+.SubTitulo{
+    text-align: center;
+    font-size: 1.8rem;
     margin-bottom: 45px;
 }
 
-.tabla{
+.Header_tabla{
+    font-size: 1.1rem;
+    font-weight: bold;
     padding-right: 25px;
     padding-left: 25px;
     border-right-style: solid;
     border-right-width: 2px;
 }
 
-.Formulario{
+.tabla{
+    text-align: center;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-right-style: solid;
+    border-right-width: 2px;
+}
+
+.MonedaFrom{
     font-size: 1.3rem;
     font-weight: bold;
     display: inline-block;
-    margin-left: 75px;
-    margin-bottom: 100px;
+    margin-left: 450px;
+    margin-bottom: 75px;
 }
 .MonedaTO{
     font-size: 1.3rem;
     font-weight: bold;
     display: inline-block;
-margin-left: 100px
+    margin-left: 175px
 }
 .Amount {
     font-size: 1.3rem;
     font-weight: bold;
-    margin-left: 75px;
-    width: 66px;
-    margin-bottom: 75px;
+    margin-left: 415px;
+    margin-bottom: 50px;
+    padding-right: 38px;
+    display: inline-block;
+}
+.Recibido{
+    display: inline;
+    margin-left: 110px;
+}   
+
+.Error{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.Links{
+    display: inline-block;
 }

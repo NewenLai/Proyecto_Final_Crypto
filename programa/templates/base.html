@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="margin-left: 25px;">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +10,11 @@
     </head>
     <body>
         <header>
-            <p>Lista de movimientos</p>
+            <h1>Crypto Management</h1>
         </header>
         <section>
             <nav>
-                <a href="/">Movimientos</a> | <a href="/purchase">Compra/Venta</a> | <a href="/status">Status</a>
-
+                {% block Links %}{%endblock%}
             </nav>
             {% block contenido %}{% endblock %} 
         </section>

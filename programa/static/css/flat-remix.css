@@ -437,6 +437,7 @@ input[type=reset]:active, input[type=reset].active,
 .blue-button, input.blue-button {
     background: #367bf0;
     border-color: #2656a8;
+    
 }
 
 .red-button, input.red-button {

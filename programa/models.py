@@ -3,6 +3,23 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 import sqlite3
 
+class ValidationError(Exception):
+  pass
+
+class Comprobacion():
+  def __init__(self, datos):
+
+    if datos["From"] == datos["To"]:
+      raise ValidationError("No puede usarse la misma moneda en ambos campos")
+
+    try:
+      self.cantidad = float(datos["cantidad"])
+    except ValueError:
+      raise ValidationError("Por favor, introduzca una cantidad valida")
+    
+    if self.cantidad <=0:
+       raise ValidationError("La cantidad debe ser positiva")
+
 class Consulta():
   def Conversion(valor):
     datos = []
@@ -31,6 +48,7 @@ class Consulta():
       data = json.loads(response.text)
       DiaHora = data["data"]["last_updated"]
       precio = data["data"]["quote"]["{}".format(datos[2])]["price"]
+
       return precio, DiaHora, datos[0], datos[1], datos[2]
     except (ConnectionError, Timeout, TooManyRedirects) as e:
       print(e)

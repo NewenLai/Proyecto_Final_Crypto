@@ -3,11 +3,16 @@
 
 {% block titulo_pagina %} Exchange {% endblock %}
 
+{% block Links %} <a href="/" class = "Links">Movimientos</a> | <p class = "Links">Compra/Venta</p> | <a href="/status">Status</a> {% endblock %}
+
 {% block contenido %}
     <h1 class= "Titulo">Compra y Venta de Crypto</h1>
+    {% for error in errores %}
+      <p class="Error"> {{error}} </p>
+    {% endfor %}
 
     <form action="/purchase" method="post">
-        <div class="Formulario">
+        <div class="MonedaFrom">
             <label for="MonedaFROM">From: </label>
             <select name="From" id="From">
               <option value="EUR" selected="">EUR - Euros</option>  
@@ -15,6 +20,14 @@
               <option value="ETH">ETH - Ethereum</option>
               <option value="ADA">ADA - Cardano</option>
               <option value="XRP">XRP - Ripple</option>
+              <option value="LTC">LTC - Litecoin</option>
+              <option value="BCH">BCH - Bitcoin Cash</option>
+              <option value="BNB">BNB - Binance Coin</option>
+              <option value="USDT">USDT - TetherUS</option>
+              <option value="EOS">EOS - EOS</option>
+              <option value="BSV">BSV - Bitcoin SV</option>
+              <option value="XLM">XLM - Stellar</option>
+              <option value="TRX">TRX - Tron</option>
             </select>
         </div>
         <div class = "MonedaTO">
@@ -25,17 +38,25 @@
               <option value="ETH">ETH - Ethereum</option>
               <option value="ADA">ADA - Cardano</option>
               <option value="XRP">XRP - Ripple</option>
+              <option value="LTC">LTC - Litecoin</option>
+              <option value="BCH">BCH - Bitcoin Cash</option>
+              <option value="BNB">BNB - Binance Coin</option>
+              <option value="USDT">USDT - TetherUS</option>
+              <option value="EOS">EOS - EOS</option>
+              <option value="BSV">BSV - Bitcoin SV</option>
+              <option value="XLM">XLM - Stellar</option>
+              <option value="TRX">TRX - Tron</option>
             </select>
         </div>
                 
         <div class = "Amount">
             <label for="Amount">Cantidad: </label>
-            <input type="text" name="cantidad" id="cantidad">
+            <input type="text" name="cantidad" id="cantidad"  style="padding-left: 7px ; padding-right: 0px;" value= {{form.cantidad}}>
+            <p class="Recibido">Recibido: {{Cantidad}}</p>
         </div>
-
-        <input class="blue-button" type="submit" value="Enviar">
+        <input class="blue-button" type="submit" name= "Envio" value="Actualizar" style="margin-left:980px;">
+        <input class="blue-button" type="submit" name= "Envio" value="Enviar" style="margin-left:980px;">
 
       </form>
-
-
+    
 {% endblock %}
