@@ -15,6 +15,10 @@
     padding-left: 25px;
     border-right-style: solid;
     border-right-width: 2px;
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
 }
 
 .tabla{
@@ -23,25 +27,27 @@
     padding-left: 25px;
     border-right-style: solid;
     border-right-width: 2px;
+    border-left-style: solid;
+    border-left-width: 2px;
 }
 
 .MonedaFrom{
     font-size: 1.3rem;
     font-weight: bold;
     display: inline-block;
-    margin-left: 450px;
+    margin-left: 670px;
     margin-bottom: 75px;
 }
 .MonedaTO{
     font-size: 1.3rem;
     font-weight: bold;
     display: inline-block;
-    margin-left: 175px
+    margin-left: 250px
 }
 .Amount {
     font-size: 1.3rem;
     font-weight: bold;
-    margin-left: 415px;
+    margin-left: 630px;
     margin-bottom: 50px;
     padding-right: 38px;
     display: inline-block;
@@ -58,4 +64,16 @@
 
 .Links{
     display: inline-block;
+}
+
+.Ganancias{
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-left: 650px;
+    margin-bottom: 50px;
+}
+.Colocado{
+    display: inline;
+    font-size: 1.4rem;
+    font-weight: bold;
 }

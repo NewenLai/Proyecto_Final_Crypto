@@ -4,11 +4,11 @@
 {% block Links %} <p class="Links">Movimientos</p> | <a href="/purchase" class="Links">Compra/Venta</a> | <a href="/status">Status</a> {% endblock %}
 
 {% block contenido %} 
-    <h1>Lista de Movimientos</h1>
+    <h1 class= "Titulo">Lista de Movimientos</h1>
     {% if items | length == 0 %}
         <p class="SubTitulo">Introduce Nuevos Movimientos</p>
     {%else%}
-        <table>
+        <table style="margin-left: 400px;">
             <tr>
                 {%for item in obj%}
                 <th class="Header_tabla">{{item}}</th>

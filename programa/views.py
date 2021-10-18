@@ -1,5 +1,3 @@
-import sqlite3
-import requests
 from requests.sessions import merge_setting
 from werkzeug.utils import validate_arguments
 from programa import app
@@ -17,14 +15,33 @@ def inicio():
 
 @app.route("/purchase", methods=["GET", "POST"])
 def compra():
+
+    cryptos = DBManager.Symbols()
+    cryptos2 = DBManager.Symbols()
+
     if request.method =="GET":
-        return render_template("purchase.html", errores = [], form = [], Cantidad = 0)
+        return render_template("purchase.html", errores = [], form = [], Cantidad = 0, symbols =  cryptos, symbols2 = cryptos2)
     else:
         datos = request.form
+
+        simbolo_Select = datos.get("From")
+        for symbol in cryptos:
+            if symbol['symbol'] == simbolo_Select:
+                symbol['selected'] = True
+            else:
+                pass
+            
+        simbolo_Select2 = datos.get("To")
+        for symbol in cryptos2:
+            if symbol['symbol'] == simbolo_Select2:
+                symbol['selected'] = True
+            else:
+                pass
+       
         try:
             Comprobacion(datos)
         except ValidationError as msg:
-            return render_template("purchase.html", errores = [str(msg)], form=datos, Cantidad = 0)
+            return render_template("purchase.html", errores = [str(msg)], form=datos, Cantidad = 0, symbols =  cryptos, symbols2 = cryptos2)
 
         Consultaprecio = Consulta.Conversion(datos)
         
@@ -32,9 +49,10 @@ def compra():
             DBManager.Manager(Consultaprecio[0], Consultaprecio[1][0:10], Consultaprecio[1][11:19],  Consultaprecio[2], Consultaprecio[3], Consultaprecio[4])
             return redirect(url_for("inicio"))
         else:
-            return render_template("purchase.html", errores = [], form = datos, Cantidad = Consultaprecio[0])
+            return render_template("purchase.html", errores = [], form = datos, Cantidad = Consultaprecio[0], symbols =  cryptos, symbols2 = cryptos2, PrecioU = Consultaprecio[5])
 
 @app.route("/status")
 def estado():
-    
+    #x = DBManager.Updater()
+  
     return render_template("status.html")
