@@ -9,7 +9,8 @@ class ValidationError(Exception):
   pass
 
 class Comprobacion(): #Comprobacion basica de los inputs en el formulario y mensajes de error en caso de no rellenar correctamente los campos
-  def __init__(self, datos):
+  def __init__(self, datos, ruta_DB):
+    self.ruta_DB = ruta_DB
 
     if datos["From"] == datos["To"]:
       raise ValidationError("No puede usarse la misma moneda en ambos campos")
@@ -23,7 +24,7 @@ class Comprobacion(): #Comprobacion basica de los inputs en el formulario y mens
        raise ValidationError("La cantidad debe ser positiva")
 
     if datos["From"] != "EUR":
-      con = sqlite3.connect('data/wallet.db')
+      con = sqlite3.connect(self.ruta_DB)
       cur = con.cursor()
       sqlconsulta = "SELECT Cantidad from Portfolio where (Moneda) = ?"
       From = datos["From"]
@@ -66,8 +67,11 @@ class Consulta(): #Funcion de consulta del valor actual de una moneda en COINMAR
       print(e)
 
 class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos que usaremos en el programa
-  def Manager(recibido, Fecha, Hora,invertido, From, To):
-    con = sqlite3.connect('data/wallet.db')
+  def __init__(self, ruta_DB):
+    self.ruta_DB = ruta_DB
+
+  def Manager(self, recibido, Fecha, Hora,invertido, From, To):
+    con = sqlite3.connect(self.ruta_DB)
     cur = con.cursor()
     #Establecemos condiciones para distinguir Compra, venta o cambio de divisas
     if From == "EUR" and To != "EUR":
@@ -89,16 +93,16 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
     sql = "INSERT INTO movs VALUES (?,?,?,?,?,?,?,?)"
     cur.execute(sql, (Fecha, Hora, From, To, Concepto, invertido, recibido, unit))
 
-    sqlconsulta = "SELECT Cantidad from Portfolio where (Moneda) = ?"
-    cur.execute(sqlconsulta, [To])
-    previoTo = cur.fetchall()
-    cur.execute(sqlconsulta, [From])
-    previoFrom = cur.fetchall()
+    self.sqlconsulta = "SELECT Cantidad from Portfolio where (Moneda) = ?"
+    cur.execute(self.sqlconsulta, [To])
+    self.previoTo = cur.fetchall()
+    cur.execute(self.sqlconsulta, [From])
+    self.previoFrom = cur.fetchall()
     update = "UPDATE Portfolio set Cantidad = ?,Valor = ? where Moneda = ?"
 
     #Se actualiza el Portfolio del usuario con la cantidad de monedas y su valor tras la transaccion
     if Concepto == "Compra":
-      cantidadtotal = previoTo[0][0] + recibido
+      cantidadtotal = self.previoTo[0][0] + recibido
       valor = unit*cantidadtotal
       valor = float("{:0.2f}".format(valor))
       cur.execute(update, (cantidadtotal, valor, To))
@@ -112,7 +116,7 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
       cur.execute(update, (EUROSInv, 1))
 
     elif Concepto =="Venta":
-      cantidadtotal = previoFrom[0][0] - float(invertido)
+      cantidadtotal = self.previoFrom[0][0] - float(invertido)
       unit = recibido/float(invertido)
       valor = unit*cantidadtotal
       valor = float("{:0.2f}".format(valor))
@@ -127,14 +131,14 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
       cur.execute(update, (EUROSret, 1))
 
     else:
-      cantidadtotal = previoFrom[0][0] - float(invertido) 
+      cantidadtotal = self.previoFrom[0][0] - float(invertido) 
       lista = {"From":"EUR","To": From,"cantidad": 1} #precio de una sola moneda elegida en Euros
       calculaeuros = Consulta.Conversion(lista)
       valor = calculaeuros[5]*cantidadtotal
       valor = float("{:0.2f}".format(valor))
       cur.execute(update, (cantidadtotal, valor, From))
 
-      cantidadtotal = previoTo[0][0] + recibido
+      cantidadtotal = self.previoTo[0][0] + recibido
       lista = {"From":"EUR","To": To,"cantidad": 1} 
       calculaeuros = Consulta.Conversion(lista)
       valor = calculaeuros[5]*cantidadtotal
@@ -144,10 +148,10 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
     con.commit()
     con.close()
 
-  def CrearTabla(): #Creamos la tabla de movimientos que se mostrara en la pagina inicial
-    con= sqlite3.connect("data/wallet.db")
+  def CrearTabla(self, holder): #Creamos la tabla de movimientos que se mostrara en la pagina inicial
+    con= sqlite3.connect(self.ruta_DB)
     cur = con.cursor()
-    cur.execute("Select * from movs")
+    cur.execute(holder)
 
     keys=[]
     for item in cur.description:
@@ -164,30 +168,51 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
     return keys, movimientos
 
 
-  def Updater(): #Funcion para calcular el valor total de cada una de las monedas que tenemos 
+  def Updater(self): #Funcion para calcular el valor total de cada una de las monedas que tenemos 
     placeholder = []
-    con = sqlite3.connect('data/wallet.db')
+    con = sqlite3.connect(self.ruta_DB)
     cur = con.cursor()
-    cur.execute("SELECT Moneda from Portfolio where Cantidad > 0")
+    holder = "SELECT Moneda from Portfolio where Cantidad > 0"
+    cur.execute(holder)
     Coins = cur.fetchall()
-    cur.execute("SELECT Cantidad from Portfolio where Cantidad > 0")
+    holder = "SELECT Cantidad from Portfolio where Cantidad > 0"
+    cur.execute(holder)
     cantidadMonedas = cur.fetchall()
     loops = 0
-    valorinversion = 0
+    valorcryptos = 0
     
     for item in Coins: #En este loop calculamos el precio de cada moneda que tenemos por unidad y lo multiplicamos por la cantidad de ellas que poseemos
       comprobar = {"From":"EUR","To": item[0],"cantidad": 1}
       placeholder = Consulta.Conversion(comprobar)
-      holder = float(cantidadMonedas[loops][0])*float(placeholder[5])
+      inversionmoneda = float(cantidadMonedas[loops][0])*float(placeholder[5])
       #Tras conseguir el valor de una moneda en concreto lo sumamos al total en una variable
-      valorinversion += holder
+      valorcryptos += inversionmoneda
       loops+=1
+
+    holder = "SELECT EURGanados from Inversion"
+    cur.execute(holder)
+    ganados = cur.fetchall()
+    ganados = ganados[0][0]
+
+    holder = "SELECT EURInvertidos from Inversion"
+    cur.execute(holder)
+    invertidos = cur.fetchall()
+    invertidos = invertidos[0][0]
+
+    saldoeuros = ganados-invertidos
+    saldoeuros = float("{:0.2f}".format(saldoeuros))
+
+    saldototal = saldoeuros + valorcryptos
+    saldototal = float("{:0.2f}".format(saldototal)) 
+
+    valorcryptos = float("{:0.2f}".format(valorcryptos)) 
 
     con.commit()
     con.close()
-    return valorinversion
+
+    return invertidos, ganados, saldoeuros, valorcryptos, saldototal
    
-  def Symbols():
+  def Symbols(self):
     symbols = [
         {"symbol":"EUR", "selected" : False}, 
         {"symbol":"BTC", "selected" : False},

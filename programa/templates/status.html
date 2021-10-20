@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block titulo_pagina %} Status {% endblock%}
-{% block Links %} <a href="/" class = "Links">Movimientos</a> | <a href="/purchase" class="Links">Compra/Venta</a> | <p class="Links">Status</p> {% endblock %}
+{% block Links %} <a href="/" class = "Links">Movimientos</a> | <a href="/purchase" class="Links">Compra/Venta</a> | <p class="Links">Status</p> | <a href="/overview" class="Links">Wallet</a> {% endblock %}
 
 {%block contenido%} 
     <h1 class= "Titulo">Inversiones y Cuentas</h1>
     <div>
-        <p class = "Colocado" style="margin-left:650px">Inversión: </p> <p class = "Colocado" style="margin-left: 10px;"> €</p>
+        <p class = "Inversiones" style="margin-left:650px">Inversión: </p> <p class = "Pruebas">{{inversion}} €</p>
     </div>
     <div>
-        <p class = "Colocado" style="margin-left: 650px;">Ganancia: </p><p class = "Colocado" style="margin-left: 10px;"> €</p>
+        <p class = "Inversiones" style="margin-left: 650px;">Ganancia: </p><p class = "Pruebas">{{ganancia}} €</p>
     </div>
 
-    <p class = "Colocado" style="margin-left: 688px;">Saldo: </p><p class = "Colocado" style="margin-left: 10px;"> €</p>
+    <p class = "Inversiones" style="margin-left: 688px;">Saldo: </p><p class = "Pruebas">{{saldo}} €</p>
     
     <div>
-        <p class = "Colocado" style="margin-left: 578px;">Valor de Cryptos: </p><p class = "Colocado" style="margin-left: 10px;"> €</p>
+        <p class = "Inversiones" style="margin-left: 578px;">Valor de Cryptos: </p><p class = "Pruebas" >{{valorcrypto}} €</p>
     </div>
     <div >
-        <p class = "Colocado" style="margin-left: 440px;">Saldo Total (Incluidas cryptos): </p><p class = "Colocado" style="margin-left: 10px;"> €</p>
+        <p class = "Inversiones" style="margin-left: 430px;">Valor Actual (Incluidas cryptos): </p><p class = "Pruebas" >{{valortotal}} €</p>
     </div>
 
 

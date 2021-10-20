@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block titulo_pagina %} Crypto Movements {% endblock %}
-{% block Links %} <p class="Links">Movimientos</p> | <a href="/purchase" class="Links">Compra/Venta</a> | <a href="/status">Status</a> {% endblock %}
+{% block Links %} <p class="Links">Movimientos</p> | <a href="/purchase" class="Links">Compra/Venta</a> | <a href="/status">Status</a> | <a href="/overview">Wallet</a>{% endblock %} 
 
 {% block contenido %} 
     <h1 class= "Titulo">Lista de Movimientos</h1>
     {% if items | length == 0 %}
         <p class="SubTitulo">Introduce Nuevos Movimientos</p>
     {%else%}
-        <table style="margin-left: 400px;">
+        <table style="margin-left: 300px;">
             <tr>
                 {%for item in obj%}
                 <th class="Header_tabla">{{item}}</th>

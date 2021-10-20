@@ -22,6 +22,7 @@
 }
 
 .tabla{
+    font-size: 1.2rem;
     text-align: center;
     padding-right: 25px;
     padding-left: 25px;
@@ -29,6 +30,17 @@
     border-right-width: 2px;
     border-left-style: solid;
     border-left-width: 2px;
+}
+
+.tabla2{
+    font-size: 1.2rem;
+    text-align: center;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
 }
 
 .MonedaFrom{
@@ -72,8 +84,15 @@
     margin-left: 650px;
     margin-bottom: 50px;
 }
-.Colocado{
+.Inversiones{
     display: inline;
     font-size: 1.4rem;
     font-weight: bold;
+}
+.Pruebas{
+    display: inline;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-left: 15px;
+    text-align: right;
 }

@@ -2,3 +2,6 @@ venv/
 Pruebas.py
 .env
 **/__pycache__
+config.py
+.vscode/
+data/
