@@ -5,6 +5,8 @@ from programa.models import DBManager, Consulta, Comprobacion, ValidationError
 ruta_DB = app.config.get("BASEDATOS")
 dbManager = DBManager(ruta_DB)
 
+dbManager.Arranque()
+
 @app.route("/")
 def inicio():
     holder = "SELECT * from movs"
@@ -61,5 +63,6 @@ def estado():
 @app.route("/overview")
 def wallet():
     holder = "SELECT * from portfolio"
+    dbManager.Updater()
     Tabla = dbManager.CrearTabla(holder)
     return render_template("monedas.html", obj = Tabla[0], items = Tabla[1])

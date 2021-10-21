@@ -4,4 +4,4 @@ Pruebas.py
 **/__pycache__
 config.py
 .vscode/
-data/
+data

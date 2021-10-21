@@ -185,6 +185,8 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
       comprobar = {"From":"EUR","To": item[0],"cantidad": 1}
       placeholder = Consulta.Conversion(comprobar)
       inversionmoneda = float(cantidadMonedas[loops][0])*float(placeholder[5])
+      holder = "UPDATE Portfolio set Valor = ? where Moneda = ?"
+      cur.execute(holder, (inversionmoneda, item[0]))
       #Tras conseguir el valor de una moneda en concreto lo sumamos al total en una variable
       valorcryptos += inversionmoneda
       loops+=1
@@ -230,3 +232,22 @@ class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos 
     ]
     return symbols
   
+  def Arranque(self): #Definimos los parametros basicos de la Base de datos si no hay una previa o esta se encuentra vacia
+    x =  self.Symbols()
+    moneda = [coin["symbol"] for coin in x]
+    moneda.remove("EUR")
+
+    con = sqlite3.connect(self.ruta_DB)
+    cur = con.cursor()
+
+    holder = "INSERT OR IGNORE INTO Portfolio (Moneda, Cantidad, Valor) VALUES (?, ?, ?)"
+    val = [("BTC", 0, 0),("ETH", 0, 0),("ADA", 0, 0),("XRP", 0, 0),("LTC", 0, 0),("BCH", 0, 0),("BNB", 0, 0),("USDT", 0, 0),("EOS", 0, 0),("BSV", 0, 0),("XLM", 0, 0),("TRX", 0, 0)]
+    cur.executemany(holder, val)
+
+    holder = "INSERT OR IGNORE INTO Inversion (id, EURInvertidos, EURGanados) VALUES (?, ?, ?)"
+    cur.execute(holder, (1,0,0))
+    con.commit()
+    con.close()
+
+
+

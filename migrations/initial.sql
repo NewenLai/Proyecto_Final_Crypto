@@ -10,13 +10,14 @@ CREATE TABLE "movs" (
 
 CREATE TABLE "Portfolio" (
 	"Moneda"	TEXT NOT NULL,
-	"Cantidad"	REAL NOT NULL,
-	"Valor"	REAL NOT NULL,
+	"Cantidad"	REAL,
+	"Valor"	REAL,
 	PRIMARY KEY("Moneda")
 );
 
 CREATE TABLE "Inversion" (
-	"id"	INTEGER,
+	"id"	INTEGER NOT NULL,
 	"EURInvertidos"	REAL NOT NULL,
-	"EURGanados"	REAL NOT NULL
+	"EURGanados"	REAL NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
 )
