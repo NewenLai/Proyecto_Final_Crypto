@@ -1,1 +1,2 @@
-basedatos="data/wallet.db"
+BASEDATOS="introduzca data/NombreBaseDatos.db"
+APIKEY = "Introduzca su APIKEY"

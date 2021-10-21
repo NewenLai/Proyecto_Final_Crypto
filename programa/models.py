@@ -2,6 +2,7 @@ from requests import Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 import sqlite3
+from config import APIKEY
 
 from werkzeug.utils import validate_arguments
 
@@ -50,7 +51,7 @@ class Consulta(): #Funcion de consulta del valor actual de una moneda en COINMAR
 
     headers =  {
       'Accepts': 'application/json',
-      'X-CMC_PRO_API_KEY': '08fe5141-25d4-42b0-b631-cc484579e920',
+      'X-CMC_PRO_API_KEY': APIKEY,
     }
 
     session = Session()
@@ -65,6 +66,7 @@ class Consulta(): #Funcion de consulta del valor actual de una moneda en COINMAR
       return recibido, DiaHora, datos[0], datos[1], datos[2], unit
     except (ConnectionError, Timeout, TooManyRedirects) as e:
       print(e)
+
 
 class DBManager(): #Funcion encargada de llamar y actualizar las bases de datos que usaremos en el programa
   def __init__(self, ruta_DB):
