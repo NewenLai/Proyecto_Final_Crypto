@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block titulo_pagina %} Crypto Movements {% endblock %}
-{% block Links %} <a href="/" class = "Links">Movimientos</a> | <a href="/purchase" class="Links">Compra/Venta</a> | <a href="/status">Status</a> | <p class="Links">Wallet</p>{% endblock %} 
+{% block Links %} <a href="/" class = "Links" style="margin-left: 15px;">Movimientos</a> | <a href="/purchase" class="Links">Compra/Venta</a> | <a href="/status" class="Links">Status</a> | <p class="Links">Wallet</p>{% endblock %} 
 
 {% block contenido %} 
-    <h1 class= "Titulo">Visualizacion de cryptos</h1>
+    <h1 class="Pagina">Visualizacion de Cryptos</h1>
     {% if items | length == 0 %}
-        <p class="SubTitulo">Introduce Nuevos Movimientos</p>
+        <p >Introduce Nuevos Movimientos</p>
     {%else%}
-        <table style="margin-left: 700px;">
+        <table class = "tabla">
             <tr>
                 {%for item in obj%}
-                <th class="Header_tabla" style="border-top-width: 2px; border-top-style: solid;">{{item}}</th>
+                <th class = "tabla">{{item}}</th>
                 {%endfor%}
             </tr>
             {%for item in items%}
             <tr>
-                <td class="tabla2" style="border-left-style: solid; border-left-width: 1px;">{{item.Moneda}}</td>
-                <td class="tabla2">{{item.Cantidad}}</td>
-                <td class="tabla2"style="border-right-style: solid; border-right-width: 1px;">{{item.Valor}}</td>
+                <td class = "tabla">{{item.Moneda}}</td>
+                <td class = "tabla">{{item.Cantidad}}</td>
+                <td class = "tabla">{{item.Valor}}</td>
             </tr>
             {%endfor%}
         </table>

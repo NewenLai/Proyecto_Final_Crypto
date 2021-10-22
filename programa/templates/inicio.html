@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 
 {% block titulo_pagina %} Crypto Movements {% endblock %}
-{% block Links %} <p class="Links">Movimientos</p> | <a href="/purchase" class="Links">Compra/Venta</a> | <a href="/status">Status</a> | <a href="/overview">Wallet</a>{% endblock %} 
+{% block Links %} <p class = Links style="margin-left: 15px;">Movimientos</p> | <a href="/purchase" class = Links>Compra/Venta</a> | <a href="/status" class = Links>Status</a> | <a href="/overview" class = Links>Wallet</a>{% endblock %} 
 
 {% block contenido %} 
-    <h1 class= "Titulo">Lista de Movimientos</h1>
+    <h1 class="Pagina">Lista de Movimientos</h1>
     {% if items | length == 0 %}
-        <p class="SubTitulo">Introduce Nuevos Movimientos</p>
+        <p class="Aviso">Introduce Nuevos Movimientos</p>
     {%else%}
-        <table style="margin-left: 300px;">
-            <tr>
+        <table class="tabla">
+            <tr >
                 {%for item in obj%}
-                <th class="Header_tabla">{{item}}</th>
+                <th class = "tabla">{{item}}</th>
                 {%endfor%}
             </tr>
             {%for item in items%}
             <tr>
-                <td class="tabla">{{item.Fecha}}</td>
-                <td class="tabla">{{item.Hora}}</td>
-                <td class="tabla">{{item.From}}</td>
-                <td class="tabla">{{item.To}}</td>
-                <td class="tabla">{{item.Concepto}}</td>
-                <td class="tabla">{{item.Invertido}}</td>
-                <td class="tabla">{{item.Recibido}}</td>
-                <td class="tabla">{{item.PrecioUnit}}</td>
+                <td class = "tabla">{{item.Fecha}}</td>
+                <td class = "tabla">{{item.Hora}}</td>
+                <td class = "tabla">{{item.From}}</td>
+                <td class = "tabla">{{item.To}}</td>
+                <td class = "tabla">{{item.Concepto}}</td>
+                <td class = "tabla">{{item.Invertido}}</td>
+                <td class = "tabla">{{item.Recibido}}</td>
+                <td class = "tabla">{{item.PrecioUnit}}</td>
             </tr>
             {%endfor%}
         </table>

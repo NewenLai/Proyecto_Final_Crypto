@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" style="margin-left: 25px;">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block titulo_pagina %}{% endblock %}</title>
-        <link rel="stylesheet" href="static/css/styles.css">
         <link rel="stylesheet" href="static/css/flat-remix.css">
+        <link rel="stylesheet" href="static/css/styles.css">
     </head>
-    <body>
-        <header>
-            <h1>Crypto Management</h1>
+    <body style="padding-bottom:60px;">
+        <header class="Titulo">
+            <h1 style="padding-left: 20px;">Crypto Management</h1>
         </header>
-        <section>
-            <nav>
+        <section class="contenedor">
+            <nav style="background-image: none;">
                 {% block Links %}{%endblock%}
             </nav>
             {% block contenido %}{% endblock %} 
         </section>
-        <footer>
-            <p>&copy; 2021 - Todos los derechos reservados</p> 
+        <footer class="foot">
+            <p style="background-image: none;">&copy; 2021 - Todos los derechos reservados</p> 
         </footer>
     </body>
 </html>

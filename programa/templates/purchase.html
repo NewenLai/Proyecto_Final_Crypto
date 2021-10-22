@@ -3,18 +3,18 @@
 
 {% block titulo_pagina %} Exchange {% endblock %}
 
-{% block Links %} <a href="/" class = "Links">Movimientos</a> | <p class = "Links">Compra/Venta</p> | <a href="/status">Status</a> | <a href="/overview">Wallet</a>{% endblock %}
+{% block Links %} <a href="/" class = "Links" style="margin-left: 15px;">Movimientos</a> | <p class = "Links">Compra/Venta</p> | <a href="/status" class = "Links">Status</a> | <a href="/overview" class = "Links">Wallet</a>{% endblock %}
 
 {% block contenido %}
-    <h1 class= "Titulo">Compra y Venta de Crypto</h1>
+    <h1 class="Pagina">Compra y Venta de Crypto</h1>
     {% for error in errores %}
       <p class="Error"> {{error}} </p>
     {% endfor %}
 
-    <form action="/purchase" method="post">
-      
-        <div class="MonedaFrom">
-            <label for="MonedaFROM">From: </label>
+    <form action="/purchase" method="post" style="background-image: none;">
+      <div id="outer">
+        <div class="MonedaFrom" style="margin-right: 250px;">
+            <label for="MonedaFROM" class="MonedaFrom">From: </label>
             <select name="From" id="From" >
               {% for symbol in symbols %}
                 <option {{'selected="selected"' if symbol['selected'] else ''}}>
@@ -25,7 +25,7 @@
         </div>
 
         <div class = "MonedaTO">
-            <label for="MonedaTO">To: </label>
+            <label for="MonedaTO" class="MonedaTO">To: </label>
             <select name="To" id="To">
               {% for symbol in symbols2 %}
                 <option {{'selected="selected"' if symbol['selected'] else ''}}>
@@ -34,18 +34,20 @@
               {% endfor %}
             </select>
         </div>
+      </div>
                 
-        <div class = "Amount">
-            <label for="Amount">Cantidad: </label>
-            <input type="text" name="cantidad" id="cantidad"  style="padding-left: 7px ; padding-right: 0px;" value= {{form.cantidad}}>
-            <p class="Recibido">Recibido: {{Cantidad}}</p>
-            <div>
-              <p class="Recibido" style="margin-left: 375px;">Precio Unit: {{PrecioU}}</p>
+        <div id="outer2">
+            <label for="Amount" class="Amount">Cantidad: </label>
+            <input type="text" style="margin-right: 100px;" name="cantidad" id="cantidad" value= {{form.cantidad}}>
+            <p class="Recibido" >Recibido: {{Cantidad}}</p>
+            <div id="outer2">
+              <p class="Recibido" style="margin-left: 105px; margin-top: 0;">Precio Unit: {{PrecioU}}</p>
             </div>
 
         </div>
-        <input class="blue-button" type="submit" name= "Envio" value="Calcular" style="margin-left:1125px;">
-        <input class="blue-button" type="submit" name= "Envio" value="Enviar" style="margin-left:1125px;">
+
+        <input class="button" type="submit" name= "Envio" value="Calcular" style="margin-left:750px; background-color: #225a23;">
+        <input class="button" type="submit" name= "Envio" value="Enviar" style="margin-left:750px; background-color: #2a5388;">
 
 
       </form>
