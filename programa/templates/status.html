@@ -4,22 +4,26 @@
 {% block Links %} <a href="/" class = "Links" style="margin-left: 15px;">Movimientos</a> | <a href="/purchase" class="Links">Compra/Venta</a> | <p class="Links">Status</p> | <a href="/overview" class="Links">Wallet</a> {% endblock %}
 
 {%block contenido%} 
-    <h1 class= "Titulo">Inversiones y Cuentas</h1>
-    <div>
-        <p class = "Inversiones" style="margin-left:650px">Inversión: </p> <p class = "Pruebas">{{inversion}} €</p>
-    </div>
-    <div>
-        <p class = "Inversiones" style="margin-left: 650px;">Ganancia: </p><p class = "Pruebas">{{ganancia}} €</p>
-    </div>
+    <h1 class= "Pagina">Inversiones y Cuentas</h1>
+    <div class="paper">
+        <div class="Background">
+            <p class = "Inversiones" >Inversión: </p> <p class="Inversiones">{{inversion}} €</p>
+        </div>
 
-    <p class = "Inversiones" style="margin-left: 688px;">Saldo: </p><p class = "Pruebas">{{saldo}} €</p>
-    
-    <div>
-        <p class = "Inversiones" style="margin-left: 578px;">Valor de Cryptos: </p><p class = "Pruebas" >{{valorcrypto}} €</p>
-    </div>
-    <div >
-        <p class = "Inversiones" style="margin-left: 430px;">Valor Actual (Incluidas cryptos): </p><p class = "Pruebas" >{{valortotal}} €</p>
-    </div>
+        <div class="Background">
+            <p class = "Inversiones" >Ganancia: </p><p class = "Inversiones">{{ganancia}} €</p>
+        </div>
+        <div class="Background">
+            <p class = "Inversiones">Saldo: </p><p class = "Inversiones">{{saldo}} €</p>
+        </div>
+        
+        <div class="Background">
+            <p class = "Inversiones">Valor de Cryptos: </p><p class = "Inversiones" >{{valorcrypto}} €</p>
+        </div>
 
+        <div class="Background">
+            <p class = "Inversiones" >Saldo Total (Incluidas cryptos): </p><p class = "Inversiones" >{{valortotal}} €</p>
+        </div>
+    </div>
 
 {%endblock%}
